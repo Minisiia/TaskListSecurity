@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+<p th:text="${task.getTitle() + ', ' + task.getDescription()}">VALUE</p>
+<br/>
+<hr/>
+<div th:if="${currentRole.equals('ROLE_ADMIN')}">
+<a th:href="@{/tasks/{id}/edit(id=${task.getId()})}">Edit</a>
+<br/>
+<hr/>
+
+<form th:method="DELETE" th:action="@{/tasks/{id}(id=${task.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</div>
+<hr/>
+<br/>
+<a href="/hello">Back to hello page</a>
+<br/>
+<hr/>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout">
+</form>
+</body>
+</html>

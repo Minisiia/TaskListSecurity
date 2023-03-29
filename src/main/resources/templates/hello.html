@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+Hello world!
+<br/>
+<br/>
+<a href="/tasks">List of tasks</a>
+<br/>
+<div th:if="${currentRole.equals('ROLE_ADMIN')}">
+<a href="/admin/index">Admin page</a>
+<br/>
+</div>
+<br/>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout">
+</form>
+</body>
+</html>

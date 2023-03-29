@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+</head>
+<body>
+<div>
+    <h3>All users</h3>
+    <div th:each="user : ${usersList}">
+        <a th:href="@{/admin/{id}(id=${user.getId()})}"
+           th:text="${user.getId() + ', ' + user.getUsername() + ', ' + user.getRole()}">user</a>
+    </div>
+</div>
+<br/>
+<hr/>
+<br/>
+<a href="/hello">Back to hello page</a>
+<br/>
+<hr/>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout">
+</form>
+
+</body>
+</html>

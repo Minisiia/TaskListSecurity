@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update genshinHero</title>
+</head>
+<body>
+
+<form th:method="patch" th:action="@{/tasks/{id}(id=${task.getId()})}" th:object="${task}">
+  <!--  <input type="hidden" name="_method" value="PATCH" />-->
+    <label for="title">Enter title: </label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title Error</div>
+    <br/>
+    <label for="description">Enter description: </label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description Error</div>
+    <br/>
+    <input type="submit" value="Update!"/>
+</form>
+<br/>
+<a href="/hello">Back to hello page</a>
+<br/>
+<hr/>
+<form th:action="@{/logout}" method="post">
+  <input type="submit" value="Logout">
+</form>
+</body>
+</html>

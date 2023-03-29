@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Task</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/tasks}" th:object="${task}">
+    <label for="title">Enter title: </label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title Error</div>
+    <br/>
+    <label for="description">Enter description: </label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description Error</div>
+    <br/>
+    <input type="submit" value="Create!"/>
+</form>
+<br/>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout">
+</form>
+
+</body>
+</html>
