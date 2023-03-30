@@ -15,10 +15,7 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String sayHello(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails personDetails = (MyUserDetails) authentication.getPrincipal();
-        User user = personDetails.getUser();
-        model.addAttribute("currentRole",user.getRole());
+        TasksController.authenticate(model);
         return "hello";
     }
 

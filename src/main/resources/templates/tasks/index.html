@@ -12,7 +12,7 @@
 <br/>
 <hr/>
 <br/>
-<div th:if="${currentRole.equals('ROLE_ADMIN')}">
+<div th:if="${currentRole.equals('ROLE_ADMIN') || currentRole.equals('ROLE_USER')}">
     <a href="tasks/new">Create new task</a>
 </div>
 <br/>

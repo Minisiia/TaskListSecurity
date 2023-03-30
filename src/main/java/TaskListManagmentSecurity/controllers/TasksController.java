@@ -42,7 +42,7 @@ public class TasksController {
                 tasksService.findAll().stream()
                         .map(this::convertToTaskDTO)
                         .collect(Collectors.toList()));
-        model.addAttribute("currentRole", getRole());
+        authenticate(model);
         return "tasks/index";
     }
 
@@ -52,7 +52,7 @@ public class TasksController {
                 tasksService.findAll().stream()
                         .map(this::convertToTaskDTO)
                         .collect(Collectors.toList()));
-        model.addAttribute("currentRole", getRole());
+        authenticate(model);
         return "tasks/index";
     }
 
@@ -60,11 +60,11 @@ public class TasksController {
     @GetMapping("/{id}")
     public String getTask(@PathVariable("id") int id, Model model) {
         model.addAttribute("task", convertToTaskDTO(tasksService.findOne(id)));
-        model.addAttribute("currentRole", getRole());
+        authenticate(model);
         return "tasks/show";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/new")
     public String newTask(@ModelAttribute("task") TaskDTO taskDTO) {
         return "tasks/new";
@@ -85,7 +85,7 @@ public class TasksController {
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "tasks/edit";
-        model.addAttribute("currentRole", getRole());
+        authenticate(model);
         tasksService.update(id, convertToTask(taskDTO));
         return "redirect:/tasks";
     }
@@ -112,11 +112,15 @@ public class TasksController {
         return modelMapper.map(task, TaskDTO.class);
     }
 
-    private String getRole() {
+    public static void authenticate(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails personDetails = (MyUserDetails) authentication.getPrincipal();
-        User user = personDetails.getUser();
-        return user.getRole();
+        if (authentication.getPrincipal().toString().equals("anonymousUser")) {
+            model.addAttribute("currentRole", "ROLE_ANONYMOUS");
+        } else {
+            MyUserDetails personDetails = (MyUserDetails) authentication.getPrincipal();
+            User user = personDetails.getUser();
+            model.addAttribute("currentRole", user.getRole());
+        }
     }
 
     @ExceptionHandler
