@@ -6,15 +6,15 @@
 </head>
 <body>
 
-<form th:method="patch" th:action="@{/tasks/{id}(id=${task.getId()})}" th:object="${task}">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+<form th:action="@{/tasks/{id}(id=${task.getId()})}" th:method="patch" th:object="${task}">
+    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
     <label for="title">Enter title: </label>
-    <input type="text" th:field="*{title}" id="title"/>
-    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title Error</div>
+    <input id="title" th:field="*{title}" type="text"/>
+    <div style="color:red" th:errors="*{title}" th:if="${#fields.hasErrors('title')}">title Error</div>
     <br/>
     <label for="description">Enter description: </label>
-    <input type="text" th:field="*{description}" id="description"/>
-    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description Error
+    <input id="description" th:field="*{description}" type="text"/>
+    <div style="color:red" th:errors="*{description}" th:if="${#fields.hasErrors('description')}">description Error
     </div>
     <br/>
     <input type="submit" value="Update!"/>
@@ -23,7 +23,7 @@
 <a href="/hello">Back to hello page</a>
 <br/>
 <hr/>
-<form th:action="@{/logout}" method="post">
+<form method="post" th:action="@{/logout}">
     <input type="submit" value="Logout">
 </form>
 </body>

@@ -5,17 +5,17 @@
     <title>Login page</title>
 </head>
 <body>
-<form name="f" method="post" action="/process_login">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+<form action="/process_login" method="post" name="f">
+    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
     <label for="username">Enter username: </label>
-    <input type="text" name="username" id="username">
+    <input id="username" name="username" type="text">
     <br/>
     <label for="password">Enter password: </label>
-    <input type="password" name="password" id="password">
+    <input id="password" name="password" type="password">
     <br/>
     <input type="submit" value="Login"/>
 
-    <div th:if="${param.error}" style="color: red">Wrong username or password</div>
+    <div style="color: red" th:if="${param.error}">Wrong username or password</div>
 
 </form>
 <br/>

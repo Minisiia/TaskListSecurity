@@ -8,13 +8,13 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class TaskListSecurityApplication {
 
-	@Bean
-	public ModelMapper modelMapper(){
-		return new ModelMapper();
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TaskListSecurityApplication.class, args);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(TaskListSecurityApplication.class, args);
-	}
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
 }

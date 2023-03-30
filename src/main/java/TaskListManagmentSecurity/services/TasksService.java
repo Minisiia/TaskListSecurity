@@ -43,9 +43,9 @@ public class TasksService {
     public Task update(int id, Task task) {
         Optional<Task> optionalTask = tasksRepository.findById(id);
         if (optionalTask.isPresent()) {
-        task.setId(id);
-        return tasksRepository.save(task);}
-        else throw new TaskNotFoundException();
+            task.setId(id);
+            return tasksRepository.save(task);
+        } else throw new TaskNotFoundException();
     }
 
     public void delete(int id) {

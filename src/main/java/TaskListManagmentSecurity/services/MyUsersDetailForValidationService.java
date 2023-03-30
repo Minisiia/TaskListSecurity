@@ -1,8 +1,8 @@
 package TaskListManagmentSecurity.services;
 
 import TaskListManagmentSecurity.models.User;
-import TaskListManagmentSecurity.security.MyUserDetails;
 import TaskListManagmentSecurity.repositories.UserRepository;
+import TaskListManagmentSecurity.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

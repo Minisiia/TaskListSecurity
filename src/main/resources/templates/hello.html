@@ -11,11 +11,11 @@ Hello world!
 <a href="/tasks">List of tasks</a>
 <br/>
 <div th:if="${currentRole.equals('ROLE_ADMIN')}">
-<a href="/admin/index">Admin page</a>
-<br/>
+    <a href="/admin/index">Admin page</a>
+    <br/>
 </div>
 <br/>
-<form th:action="@{/logout}" method="post">
+<form method="post" th:action="@{/logout}">
     <input type="submit" value="Logout">
 </form>
 </body>

@@ -6,16 +6,16 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/auth/registration}" th:object="${user}">
-  <label for="username">Enter username: </label>
-  <input type="text" th:field="*{username}" id="username"/>
-  <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
-  <br/>
-  <label for="password">Enter password: </label>
-  <input type="password" th:field="*{password}" id="password"/>
-  <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
-  <br/>
-  <input type="submit" value="Add!"/>
+<form th:action="@{/auth/registration}" th:method="POST" th:object="${user}">
+    <label for="username">Enter username: </label>
+    <input id="username" th:field="*{username}" type="text"/>
+    <div style="color:red" th:errors="*{username}" th:if="${#fields.hasErrors('username')}">Username Error</div>
+    <br/>
+    <label for="password">Enter password: </label>
+    <input id="password" th:field="*{password}" type="password"/>
+    <div style="color:red" th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Password Error</div>
+    <br/>
+    <input type="submit" value="Add!"/>
 </form>
 </body>
 </html>

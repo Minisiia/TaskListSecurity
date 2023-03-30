@@ -1,8 +1,9 @@
-CREATE TABLE tasks (
-                       id INT PRIMARY KEY AUTO_INCREMENT,
-                       title VARCHAR(255) NOT NULL,
-                       description TEXT,
-                       created_at DATETIME
+CREATE TABLE tasks
+(
+    id          INT PRIMARY KEY AUTO_INCREMENT,
+    title       VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at  DATETIME
 );
 INSERT INTO tasks (title, description, created_at)
 VALUES ('Сделать дейлики', 'Победить всех монстров из 4х ежедневных заданий', NOW()),
@@ -12,9 +13,10 @@ VALUES ('Сделать дейлики', 'Победить всех монстр
        ('Пройти ивенты', 'Закончить прохождение всех активных ивентов', NOW()),
        ('Собрать "Заблудшего в метели"', 'Собрать полный сет артифактов "Заблудший в метели" для Дионы', NOW());
 
-CREATE TABLE security (
-    id int AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE security
+(
+    id       int AUTO_INCREMENT PRIMARY KEY,
     username varchar(30) NOT NULL,
     password varchar(255),
-    role VARCHAR(30)
+    role     VARCHAR(30)
 );

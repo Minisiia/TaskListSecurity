@@ -8,6 +8,7 @@ import TaskListManagmentSecurity.services.TasksService;
 import TaskListManagmentSecurity.util.TaskErrorResponse;
 import TaskListManagmentSecurity.util.TaskNotCreatedException;
 import TaskListManagmentSecurity.util.TaskNotFoundException;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @Controller
@@ -34,6 +34,17 @@ public class TasksController {
                            ModelMapper modelMapper) {
         this.tasksService = tasksService;
         this.modelMapper = modelMapper;
+    }
+
+    public static void authenticate(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getPrincipal().toString().equals("anonymousUser")) {
+            model.addAttribute("currentRole", "ROLE_ANONYMOUS");
+        } else {
+            MyUserDetails personDetails = (MyUserDetails) authentication.getPrincipal();
+            User user = personDetails.getUser();
+            model.addAttribute("currentRole", user.getRole());
+        }
     }
 
     @GetMapping()
@@ -55,7 +66,6 @@ public class TasksController {
         authenticate(model);
         return "tasks/index";
     }
-
 
     @GetMapping("/{id}")
     public String getTask(@PathVariable("id") int id, Model model) {
@@ -110,17 +120,6 @@ public class TasksController {
 
     private TaskDTO convertToTaskDTO(Task task) {
         return modelMapper.map(task, TaskDTO.class);
-    }
-
-    public static void authenticate(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.getPrincipal().toString().equals("anonymousUser")) {
-            model.addAttribute("currentRole", "ROLE_ANONYMOUS");
-        } else {
-            MyUserDetails personDetails = (MyUserDetails) authentication.getPrincipal();
-            User user = personDetails.getUser();
-            model.addAttribute("currentRole", user.getRole());
-        }
     }
 
     @ExceptionHandler

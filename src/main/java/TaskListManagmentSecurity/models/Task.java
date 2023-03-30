@@ -1,8 +1,9 @@
 package TaskListManagmentSecurity.models;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,12 +15,12 @@ public class Task {
     private int id;
 
     @Column(name = "title")
-    @NotEmpty(message = "Title should not be empty")
+    @NotBlank(message = "Title should not be empty")
     @Size(min = 2, max = 255, message = "Title should be between 2 and 30 characters")
     private String title;
 
     @Column(name = "description")
-    @NotEmpty(message = "Description should not be empty")
+    @NotBlank(message = "Description should not be empty")
     private String description;
 
     @Column(name = "created_at")
